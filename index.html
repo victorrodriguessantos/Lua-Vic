@@ -39,6 +39,7 @@
                 <a target="_blank" href="https://github.com/luanavaladares"><img src="/images/github.png"></a>
                 Luana Valadares
             </li>
+
             <li class="git-item">
                 <a target="_blank" href="https://github.com/victorrodriguessantos"><img src="/images/github.png"></a>
                 Victor Rodrigues
@@ -160,9 +161,15 @@
         flex-direction: column; /* Organiza a imagem e o texto em coluna */
         align-items: center;
         justify-content: center;
+        border-radius: 25%;
+        border: 1px solid #251b1b;
+    }
+    .git-item:hover{
+        transform: scale(0.9);
+        filter: drop-shadow(0 0 10px #fffdef);
     }
     .git-item img {
-        width: 40px; /* Ajuste o tamanho da imagem conforme necessário */
+        width: 40px;
         height: 40px;
     }
     footer p{
