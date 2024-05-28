@@ -11,8 +11,8 @@
     <header>
         <nav>
             <ul>
-                <li>ENTRAR</li>
-                <li>CADASTRAR</li>
+                <li onclick="window.location.href='login.html'">ENTRAR</li></a>
+                <li onclick="window.location.href='cadastrar.html'">CADASTRAR</li>
                 <li>CONTATO</li>
             </ul>
         </nav>
@@ -61,11 +61,15 @@
         max-width: 100%;
         background-color: #000000;
         padding: 20px;
+        text-decoration: none;
+
     }
     nav ul{
         display: flex;
         gap: 10px;
         list-style-type: none;
+        text-decoration: none;
+
     }
     nav li{
         border: 1px solid #000;
@@ -73,6 +77,8 @@
         background: linear-gradient(#e09b05,#fce023);
         justify-content: center;
         align-items: center;
+        text-decoration: none;
+
     }
     nav li:hover{
         transform: scale(0.90);
