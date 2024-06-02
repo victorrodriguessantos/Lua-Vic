@@ -13,15 +13,15 @@
 
         <form id="form">
             <h1>CADASTRAR</h1><br>
-            <label for="user">Usuario</label>
-            <input id="user" type="text" placeholder="Crie seu usuario" required><br>
-            <label for="password">Senha</label>
-            <input id="password" type="password" placeholder="Crie sua senha" required><br>
+
             <label for="email">Email</label>
             <input id="email" type="email" placeholder="Digite seu email" required>
+            <label for="password">Senha</label>
+            <input id="password" type="password" placeholder="Crie sua senha" required><br>
             <label for="number">Telefone</label>
             <input id="number" type="phone" placeholder="Digite seu número">
-            <button id="submit" type="submit">CADASTRAR</button>
+            <button type="button" onclick="criarCadastro()">CADASTRAR</button>
+
             <p>Já possui uma conta? <a href="/login.html"><span>Logar</span></a></p>
         </form>
 
@@ -41,7 +41,7 @@
         <p>Site desenvolvido na materia Programação Web I do João Siles © 2024</p>
     </footer>
 
-    
+    <script src="/index.js"></script>
 </body>
 
 <style>
