@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/logotipo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <title>LUA&VIC</title>
+</head>
+<body>
+    <div class="container">
+        <img src="/images/logotipo2.png">
+        <form>
+            <h1>ENTRAR</h1>
+
+            <label for="email">Email:</label></br>
+            <input id="email" type="email" placeholder="Digite seu E-mail" required></br>
+
+            <label for="senha">Senha:</label></br>
+            <input id="senha" type="password" placeholder="Digite sua Senha" required></br>
+            
+            <button>ACESSAR</button>
+            <p>Novo por aqui? <a href="/cadastrar.html"><span>Cadastrar</span></a></p>
+        </form>
+    </div>
+
+    <footer>
+        <ul class="container">
+            <li class="git-item">
+                <a target="_blank" href="https://github.com/luanavaladares"><img src="/images/github.png"></a>
+                Luana Valadares
+            </li>
+
+            <li class="git-item">
+                <a target="_blank" href="https://github.com/victorrodriguessantos"><img src="/images/github.png"></a>
+                Victor Rodrigues
+            </li>
+        </ul>
+        <hr>
+        <p>Site desenvolvido na materia Programação Web I do João Siles © 2024</p>
+    </footer>
+
+
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background-color: #e09b05;
+    }
+    .container{
+        display: flex;
+        margin: auto;
+        margin-top: 158px;
+        text-align: center;
+        justify-content: center;
+        filter: drop-shadow(0 0 10px #000000);
+        font-family:'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+    .container img{
+        height: 500px;
+        width: 400px;
+    }
+    .container form{
+        height: 500px;
+        width: 400px;
+        background-color: #fce023;
+    }
+    .container h1{
+        text-align: center;
+    }
+    .container input{
+        margin-bottom: 10px;
+        height: 30px;
+        width: 80%;
+        border-radius: 10px;
+    }
+    .container button{        
+        height: 40px;
+        width: 80%;
+        background-color: #e09b05;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+    .container button:hover{
+        filter: drop-shadow(0 0 10px #ffffff);
+        background-color: #f6c10a;
+    }
+
+    /* INICIO FOOTER */
+
+    footer{
+        background-color: #000000;
+        margin-top: 155px;
+        filter: drop-shadow(0 0 10px #000000);
+    }
+    footer ul{
+        height: 100px;
+        display: flex;
+        gap: 30px;
+        list-style-type: none;
+        justify-content: center;
+        color: #fffdef;
+    }
+    .git-item {
+        display: flex;
+        flex-direction: column; /* Organiza a imagem e o texto em coluna */
+        align-items: center;
+        justify-content: center;
+        border-radius: 25%;
+        border: 1px solid #251b1b;
+    }
+    .git-item:hover{
+        transform: scale(0.9);
+        filter: drop-shadow(0 0 10px #fffdef);
+    }
+    .git-item img {
+        width: 40px;
+        height: 40px;
+    }
+    footer p{
+        color: #fffdef;
+        text-align: center;
+        padding: 5px;
+    }
+
+    /* SCROLL */
+
+    body::-webkit-scrollbar {
+        width: 12px;
+    }
+    body::-webkit-scrollbar-track {
+        background: #fffdef;
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: #fce023;
+        border-radius: 20px;
+        border: 3px solid #fffdef;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 780px){
+        .container img{
+            display: none;
+        }
+        
+    }
+</style>
+    
+</body>
+</html>
