@@ -1,35 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/logotipo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <title>LUA&VIC</title>
 </head>
 <body>
     <div class="container">
         <img src="/images/logotipo2.png">
         <form>
-            <input type="email" placeholder="Digite seu e-mail">
-            <input type="password" placeholder="Digite sua senha">
-            <input type="number" placeholder="Digite seu telefone">
-            <button> CADASTRAR </button>
+            <h1>CADASTRO</h1>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Digite seu email" required>
+
+            <label for="password">Senha</label>
+            <input id="password" type="password" placeholder="Crie sua senha" required><br>
+
+            <label for="number">Telefone</label>
+            <input id="number" type="phone" placeholder="Digite seu número">
+
+            <button type="button" onclick="criarCadastro()">CADASTRAR</button>
+
+            <p>Já possui uma conta? <a href="/new_login.html"><span>Logar</span></a></p>
         </form>
     </div>
 
-    <style>
-        .container{
-            display: flex;
-        }
+    <footer>
+        <ul>
+            <li class="git-item">
+                <a target="_blank" href="https://github.com/luanavaladares"><img src="/images/github.png"></a>
+                Luana Valadares
+            </li>
+
+            <li class="git-item">
+                <a target="_blank" href="https://github.com/victorrodriguessantos"><img src="/images/github.png"></a>
+                Victor Rodrigues
+            </li>
+        </ul>
+        <hr>
+        <p>Site desenvolvido na materia Programação Web I do João Siles © 2024</p>
+    </footer>
+
+
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background-color: #1C1C1C;
+    }
+    .container{
+        display: flex;
+        margin: auto;
+        margin-top: 158px;
+        text-align: center;
+        justify-content: center;
+        filter: drop-shadow(0 0 10px #000000);
+        font-family:'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+    .container img{
+        height: 600px;
+        width: 500px;
+    }
+    .container form{
+        height: 600px;
+        width: 500px;
+        background-color: #fce023;
+    }
+    .container h1{
+        text-align: center;
+        margin: 10px 0 50px;
+    }
+    .container label{
+        margin-right: 350px;
+    }
+    .container input{
+        margin-bottom: 10px;
+        height: 30px;
+        width: 80%;
+        border-radius: 10px;
+    }
+    .container button{        
+        height: 40px;
+        width: 80%;
+        background-color: #e09b05;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+    .container button:hover{
+        filter: drop-shadow(0 0 10px #ffffff);
+        background-color: #f6c10a;
+    }
+
+    /* INICIO FOOTER */
+
+    footer{
+        background-color: #000000;
+        margin-top: 155px;
+        filter: drop-shadow(0 0 10px #000000);
+    }
+    footer ul{
+        height: 100px;
+        display: flex;
+        gap: 30px;
+        list-style-type: none;
+        justify-content: center;
+        color: #fffdef;
+    }
+    .git-item {
+        display: flex;
+        flex-direction: column; /* Organiza a imagem e o texto em coluna */
+        align-items: center;
+        justify-content: center;
+        border-radius: 25%;
+        border: 1px solid #251b1b;
+    }
+    .git-item:hover{
+        transform: scale(0.9);
+        filter: drop-shadow(0 0 10px #4386f1);
+    }
+    .git-item img {
+        width: 40px;
+        height: 40px;
+    }
+    footer p{
+        color: #fffdef;
+        text-align: center;
+        padding: 5px;
+    }
+
+    /* SCROLL */
+
+    body::-webkit-scrollbar {
+        width: 12px;
+    }
+    body::-webkit-scrollbar-track {
+        background: #fffdef;
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: #fce023;
+        border-radius: 20px;
+        border: 3px solid #fffdef;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 780px){
         .container img{
-            height: 600px;
-            width: 500px;
+            display: none;
         }
-        .container form{
-            height: 600px;
-            width: 500px;
-            background-color: #fce023;
-        }
-    </style> 
+    }
+</style>
+    
 </body>
 </html>
