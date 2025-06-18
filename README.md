@@ -1,141 +1,74 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Servidores</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<body class="bg-gray-100 min-h-screen p-4">
-  <!-- Header -->
-  <header class="flex items-center justify-between bg-white p-4 rounded shadow">
-    <div class="flex items-center gap-4">
-      <div class="text-xl font-bold">LOGO</div>
-      <input type="text" id="filtro-nome" placeholder="Nome do Servidor" class="border px-3 py-1 rounded focus:outline-none" />
-    </div>
-    <div>
-      <i class="fas fa-user-circle text-2xl text-gray-600"></i>
-    </div>
-  </header>
+<thead class="border-b">
+  <tr>
+    <th>Servidor</th>
+    <th>IP</th>
+    <th>Instância <i class="fi fi-rr-filter" id="filtro-instancia"></i></th>
+    <th>Sistema <i class="fi fi-rr-filter" id="filtro-sistema"></i></th>
+    <th>Provedor <i class="fi fi-rr-filter" id="filtro-provedor"></i></th>
+    <th>Status <i class="fi fi-rr-filter" id="filtro-status"></i></th>
+    <th>State <i class="fi fi-rr-filter" id="filtro-state"></i></th>
+    <th>Ação</th>
+  </tr>
+</thead>
 
-  <!-- Ações -->
-  <div class="flex items-center gap-4 my-4">
-    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Criar Servidor</button>
-    <button class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
-      <i class="fas fa-download"></i>
-    </button>
-  </div>
+const filtros = {
+  instancia: document.getElementById("filtro-instancia"),
+  sistema: document.getElementById("filtro-sistema"),
+  provedor: document.getElementById("filtro-provedor"),
+  status: document.getElementById("filtro-status"),
+  state: document.getElementById("filtro-state"),
+};
 
-  <!-- Tabela -->
-  <div class="bg-white rounded shadow p-4 overflow-x-auto">
-    <table class="w-full text-left">
-      <thead class="border-b">
-        <tr class="text-gray-700">
-          <th class="py-2 px-4">Servidor</th>
-          <th class="py-2 px-4">IP Privado</th>
-          <th class="py-2 px-4">IP Público</th>
-          <th class="py-2 px-4">Instância</th>
-          <th class="py-2 px-4">Sistema</th>
-          <th class="py-2 px-4">Status</th>
-          <th class="py-2 px-4">Estado</th>
-          <th class="py-2 px-4">Ação</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-servidores">
-        <tr><td colspan="8" class="text-center py-4 text-gray-500">Carregando...</td></tr>
-      </tbody>
-    </table>
+function criarDropdown(coluna, valores) {
+  const menu = document.createElement("div");
+  menu.classList.add("dropdown-menu");
 
-    <!-- Paginação -->
-    <div class="flex justify-end mt-4 gap-2">
-      <button id="btn-anterior" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">« Anterior</button>
-      <span id="pagina-info" class="px-2 py-1 text-sm text-gray-700"></span>
-      <button id="btn-proxima" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Próxima »</button>
-    </div>
-  </div>
+  valores.forEach((valor) => {
+    const item = document.createElement("div");
+    item.textContent = valor;
+    item.addEventListener("click", () => filtrarTabela(coluna, valor));
+    menu.appendChild(item);
+  });
 
-  <script>
-    const tabela = document.getElementById('tabela-servidores');
-    const filtroNome = document.getElementById('filtro-nome');
-    const btnAnterior = document.getElementById('btn-anterior');
-    const btnProxima = document.getElementById('btn-proxima');
-    const paginaInfo = document.getElementById('pagina-info');
+  return menu;
+}
 
-    let paginaAtual = 1;
-    const limite = 10;
-    let totalPaginas = 1;
+function filtrarTabela(coluna, valor) {
+  const filtrados = servidores.filter((s) => s[coluna] === valor);
+  renderizarTabela(filtrados);
+}
 
-    async function carregarServidores() {
-      try {
-        const resposta = await axios.get(`http://192.168.88.13:6060/instance/`, {
-          headers: {
-            'Signature': 'SUA_ASSINATURA_AQUI',
-            'type_access': 'user_access'
-          },
-          params: {
-            _limit: limite,
-            page: paginaAtual
-          }
-        });
+// Adiciona eventos de clique aos ícones de filtro
+Object.entries(filtros).forEach(([coluna, elemento]) => {
+  elemento.addEventListener("click", (event) => {
+    const valoresUnicos = [...new Set(servidores.map((s) => s[coluna]))]; 
+    const dropdown = criarDropdown(coluna, valoresUnicos);
+    
+    dropdown.style.position = "absolute";
+    dropdown.style.top = `${event.clientY}px`;
+    dropdown.style.left = `${event.clientX}px`;
 
-        const servidores = resposta.data.data;
-        totalPaginas = resposta.data.total_pages;
+    document.body.appendChild(dropdown);
+  });
+});
 
-        tabela.innerHTML = '';
 
-        const filtro = filtroNome.value.toLowerCase();
-        const filtrados = servidores.filter(s => s.server_name.toLowerCase().includes(filtro));
 
-        if (!filtrados.length) {
-          tabela.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-gray-500">Nenhum servidor encontrado.</td></tr>';
-          return;
-        }
+.dropdown-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 150px;
+  cursor: pointer;
+}
 
-        filtrados.forEach(servidor => {
-          const linha = document.createElement('tr');
-          linha.innerHTML = `
-            <td class="py-2 px-4">${servidor.server_name}</td>
-            <td class="py-2 px-4">${servidor.private_ip}</td>
-            <td class="py-2 px-4">${servidor.public_ip}</td>
-            <td class="py-2 px-4">${servidor.instance_type}</td>
-            <td class="py-2 px-4">${servidor.system}</td>
-            <td class="py-2 px-4">${servidor.status_server}</td>
-            <td class="py-2 px-4">${servidor.state_instance}</td>
-            <td class="py-2 px-4"><button class="text-blue-600 hover:underline">Detalhes</button></td>
-          `;
-          tabela.appendChild(linha);
-        });
+.dropdown-menu div {
+  padding: 5px;
+}
 
-        paginaInfo.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
-
-      } catch (erro) {
-        console.error('Erro ao buscar servidores:', erro);
-        tabela.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-red-500">Erro ao buscar os dados.</td></tr>';
-      }
-    }
-
-    filtroNome.addEventListener('input', () => {
-      carregarServidores();
-    });
-
-    btnAnterior.addEventListener('click', () => {
-      if (paginaAtual > 1) {
-        paginaAtual--;
-        carregarServidores();
-      }
-    });
-
-    btnProxima.addEventListener('click', () => {
-      if (paginaAtual < totalPaginas) {
-        paginaAtual++;
-        carregarServidores();
-      }
-    });
-
-    carregarServidores();
-  </script>
-</body>
-</html>
+.dropdown-menu div:hover {
+  background: #f0f0f0;
+}
 
